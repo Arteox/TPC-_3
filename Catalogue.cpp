@@ -125,7 +125,8 @@ void Catalogue::Sauvegarde(int numFichier)
     {
         for (int i =0; i<nb_trajets;i++){
             collection[i]->Sauvegarder(fic);
-            fic <<endl;
+            fic<<'@';
+            fic <<endl <<endl;
         }
     }
 
