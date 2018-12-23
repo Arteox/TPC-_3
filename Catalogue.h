@@ -14,6 +14,8 @@
 #include "TrajetCompose.h"
 #include <cstring>
 #include <fstream>
+#include <sstream>
+#include <string>
 
 //--------------------------------------------------- Interfaces utilisées
 

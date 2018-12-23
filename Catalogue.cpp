@@ -13,6 +13,11 @@
 //-------------------------------------------------------- Include système
 #include <iostream>
 #include <cstring>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <iterator>
+#include <vector>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -126,7 +131,7 @@ void Catalogue::Sauvegarde(int numFichier)
         for (int i =0; i<nb_trajets;i++){
             collection[i]->Sauvegarder(fic);
             fic<<'@';
-            fic <<endl <<endl;
+            fic <<endl;
         }
     }
 
@@ -137,9 +142,37 @@ void Catalogue::Charger(int numFichier)
 {
     ifstream fic;
     string s = "sauvegarde/sauv" + to_string(numFichier);
+    string lect;
+    string typeTrajet;
+    int numLigne =0;
     fic.open(s);
     if (fic)
     {
+    	for (lect; getline(fic, lect); )
+    	{
+    		if (numLigne ==0)
+    		{
+    			typeTrajet= lect;
+    		}
+
+    		if (typeTrajet == "TrajetSimple" && numLigne ==2)
+    		{
+
+    			istringstream iss(lect);
+    			vector <string> motsIndiv {istream_iterator<string>{iss}, istream_iterator<string>{}};
+    			Ajouter(new TrajetSimple(motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str()));
+    		}
+
+    		if (lect == "@")
+    		{
+    			numLigne=0;
+    		}
+    		else
+    		{
+    			numLigne++;
+    		}
+
+    	}
 
     }
 }
