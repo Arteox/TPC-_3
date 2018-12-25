@@ -17,8 +17,8 @@ Catalogue.o: Catalogue.cpp Catalogue.h
 
 %.ex: 
 	g++ -g $^ -o $@
-	./$@
-	#valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --max-stackframe=10485760 ./$@
+	#./$@
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --max-stackframe=10485760 ./$@
 
 %.o: %.cpp 
 	g++ -ansi -pedantic -Wall -std=c++11 -c $< -o $@ 

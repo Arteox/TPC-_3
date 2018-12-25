@@ -64,11 +64,13 @@ public:
     // Contrat :
     // aucun
     
-        //int GetNbTraj();
+    //int GetNbTraj();
 
-        void Sauvegarde(int numFichier);
+    void Sauvegarde(int numFichier);
 
-        void Charger(int numFichier);
+    void Charger(int numFichier);
+	
+	//void ChargerParType(int typeSelecTrajet, int numFichier);
 
 
 //-------------------------------------------- Constructeurs - destructeur

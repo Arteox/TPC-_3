@@ -1,12 +1,12 @@
-#include "Trajet.h"
-#include "TrajetSimple.h"
-#include "TrajetCompose.h"
 #include <iostream>
-#include "Catalogue.h"
-#include "Menu.h"
 #include <cstring>
 #include <fstream>
 #include <string>
+#include "Trajet.h"
+#include "TrajetSimple.h"
+#include "TrajetCompose.h"
+#include "Catalogue.h"
+#include "Menu.h"
 using namespace std;
 //!! Ce programme peut faire des erreurs dûes à l'allocation de TS** de taille MAX_LENGTH.
 // Cependant elles ne nuisent pas à l'exécution du programme, elles veulent juste dire que tout l'espace n'est pas utilisé
@@ -40,9 +40,9 @@ int main(){
 		cout<<"Tapez 2 pour ajouter un TrajetCompose"<<endl;
 		cout<<"Tapez 3 pour faire une recherche"<<endl;
 		cout<<"Tapez 4 pour Afficher le catalogue"<<endl;
-                cout<<"Tapez 5 pour sauvegarder le catalogue actuel"<<endl;
-                cout<<"Tapez 6 pour charger un catalogue depuis un fichier"<<endl;
-                cout<<"Tapez 7 pour quitter le catalogue"<<endl;
+        cout<<"Tapez 5 pour sauvegarder le catalogue actuel"<<endl;
+        cout<<"Tapez 6 pour charger un catalogue depuis un fichier"<<endl;
+        cout<<"Tapez 7 pour quitter le catalogue"<<endl;
 
 
 		cin>>choix;
@@ -116,19 +116,67 @@ int main(){
 				C.Afficher();
 				break;
 
-                        case 5:
-                                cout << "Vous avez choisi la sauvegarde du catalogue actuel"<<endl;
-                                C.Sauvegarde(nb_sauv);
-                                nb_sauv++;
-                                break;
+			//sauvegarde du catalogue
+            case 5:
+                cout << "vous avez choisi la sauvegarde du catalogue actuel"<<endl;
+                C.Sauvegarde(nb_sauv);
+                nb_sauv++;
+                break;
 
+			//chargement d'un catalogue
+            case 6:
+			{
 
-                        case 6:
-                                cout << "Vous avez choisi de charger un catalogue depuis un fichier"<<endl;
-                                C.Charger(1);
-                                break;
+                cout << "Vous avez choisi de charger un catalogue depuis un fichier"<<endl;
+				
+				//on vérifie le nb de fichiers de sauvegarde disponible
+				ifstream fic;
+				char nb_fichier;
+				fic.open("sauvegarde/nb_sauv");
+				int fichier_choisi;
+				if (fic) {
+					fic.get(nb_fichier);
+				}
+				fic.close();
+				
+				//si aucun fichier disponible on affiche un message
+				if (nb_fichier == '\0')
+				{
+					cout << "Aucun fichier disponible" << endl;
+				}
+				//si des sauvegardes sont disponibles
+				else
+				{
+					cout << "Veuillez choisir un fichier entre 1 et " << nb_fichier << endl;
+					cin >> fichier_choisi;
+					
+					cout << "Sélectionnez un critère de sélection de chargement : " << endl;
+					cout << "1 : aucun critère " << endl;
+					cout << "2 : par type de trajet " << endl;
+					cout << "3: par ville de départ et/ou d'arrivée" << endl;
+					cout << "4: par intervalle de trajets" << endl;
+					int choix_Selec;
+					cin >> choix_Selec;
+					
+					switch(choix_Selec){
+						case 1:
+							cout << "avant de charger" << endl;
+							C.Charger(fichier_choisi);
+							cout << "charger fini" <<endl;
+							break;
+						case 2:
+						{
+							cout << "Tapez 1 pour charger que des trajets simples ou 2 pour que des trajets composés" << endl;
+							int typeTrajet;
+							cin >>typeTrajet;
+							break;
+						}
+					}
+				}
+				break;
+			}
 			//fin du menu
-                        case 7:
+            case 7:
 				cout<<"Au revoir"<<endl;
 				arret=true;
 				break;
@@ -140,12 +188,12 @@ int main(){
 	for (int i =0; i<MAX_LENGTH;i++){
 		delete TS[i];
 	}
-    	delete [] TS;
+    delete [] TS;
 
 	for (int i =0; i<MAX_LENGTH;i++){
 		delete TC[i];
 	}
-    	delete [] TC;
+	delete [] TC;
 
 	delete [] villeA;
 	delete [] villeB;

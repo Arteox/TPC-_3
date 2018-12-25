@@ -134,17 +134,32 @@ void Catalogue::Sauvegarde(int numFichier)
             fic <<endl;
         }
     }
-
     fic.close();
+	
+	//on sauvegarde dans un fichier le nb de fichier de sauvegarde
+	fic.open("sauvegarde/nb_sauv");
+	if (fic)
+	{
+		fic << numFichier;
+	}
+	fic.close();
 }
 
 void Catalogue::Charger(int numFichier)
 {
+	cout << "en train de charger" << endl;
+	
     ifstream fic;
     string s = "sauvegarde/sauv" + to_string(numFichier);
     string lect;
     string typeTrajet;
     int numLigne =0;
+	
+	//nécessaire pour le constructeur du trajet compose
+	TrajetSimple* t1;
+	TrajetSimple* t2;
+	TrajetCompose* tc;
+	
     fic.open(s);
     if (fic)
     {
@@ -154,28 +169,92 @@ void Catalogue::Charger(int numFichier)
     		{
     			typeTrajet= lect;
     		}
-
+			
+			istringstream iss(lect);
+    		vector <string> motsIndiv {istream_iterator<string>{iss}, istream_iterator<string>{}};
     		if (typeTrajet == "TrajetSimple" && numLigne ==2)
     		{
-
-    			istringstream iss(lect);
-    			vector <string> motsIndiv {istream_iterator<string>{iss}, istream_iterator<string>{}};
     			Ajouter(new TrajetSimple(motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str()));
     		}
+			
+			else if (typeTrajet == "TrajetCompose")
+			{
+				if (numLigne == 2)
+				{
+					cout << "debut ligne 2" << endl;
+					t1 = new TrajetSimple(motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str());;
+					cout << "fin ligne 2" << endl;
+				}
+				else if (numLigne ==3)
+				{
+					t2 = new TrajetSimple(motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str());
+					tc = new TrajetCompose(*t1,*t2,2);
+				}
+				else if (numLigne > 3 && lect != "@")
+				{
+					TrajetSimple t3 (motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str());
+					tc->Ajouter(t3);
+				}
+				if (lect == "@"){
+					Ajouter(tc);
+				}
+			}
 
     		if (lect == "@")
     		{
+				delete t1;
+				delete t2;
+				//delete tc;
     			numLigne=0;
     		}
     		else
     		{
     			numLigne++;
     		}
-
     	}
-
     }
 }
+/*
+void Catalogue::ChargerParType(int typeSelecTrajet, int numFichier)
+{
+	if (typeSelecTrajet ==1)
+	{
+		ifstream fic;
+		string s = "sauvegarde/sauv" + to_string(numFichier);
+		string lect;
+		string typeTrajet;
+		int numLigne =0;
+		fic.open(s);
+		if (fic)
+		{
+			for (lect; getline(fic, lect); )
+			{
+				if (numLigne ==0)
+				{
+					typeTrajet= lect;
+				}
+
+				if (typeTrajet == "TrajetSimple" && numLigne ==2)
+				{
+					istringstream iss(lect);
+					vector <string> motsIndiv {istream_iterator<string>{iss}, istream_iterator<string>{}};
+					Ajouter(new TrajetSimple(motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str()));
+				}
+
+				if (lect == "@")
+				{
+					numLigne=0;
+				}
+				else
+				{
+					numLigne++;
+				}
+
+			}
+
+		}
+	}
+}*/
 
 //-------------------------------------------- Constructeurs - destructeur
 Catalogue::Catalogue ( const Catalogue & unCatalogue )
@@ -210,8 +289,12 @@ Catalogue::~Catalogue ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Catalogue>" << endl;
 #endif
-	
+
+	for (int i =0; i<nb_trajets; i++){
+		delete collection[i];
+	}
 	delete [] collection;
+	
 } //----- Fin de ~Catalogue
 
 
