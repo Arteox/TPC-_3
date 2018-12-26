@@ -190,9 +190,9 @@ int main(){
 	}
     delete [] TS;
 
-	for (int i =0; i<MAX_LENGTH;i++){
+	/*for (int i =0; i<MAX_LENGTH;i++){
 		delete TC[i];
-	}
+	}*/
 	delete [] TC;
 
 	delete [] villeA;
