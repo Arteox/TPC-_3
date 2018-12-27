@@ -289,6 +289,94 @@ void Catalogue::ChargerParType(int typeSelecTrajet, int numFichier)
 	fic.close();
 }
 
+void Catalogue::ChargerParVille(int numFichier, string Dep, string Arr)
+{
+    ifstream fic;
+    string s = "sauvegarde/sauv" + to_string(numFichier);
+    string lect;
+    string typeTrajet;
+    int numLigne =0;
+	
+	TrajetSimple* t1;
+	TrajetSimple* t2;
+	TrajetCompose* tc;
+	
+	bool ajoutTrajetSimple;
+	bool ajoutTrajetCompose;
+	
+    fic.open(s);
+    if (fic)
+    {
+    	for (lect; getline(fic, lect); )
+    	{
+    		if (numLigne ==0)
+    		{
+    			typeTrajet= lect;
+    		}
+			istringstream iss(lect);
+    		vector <string> motsIndiv {istream_iterator<string>{iss}, istream_iterator<string>{}};
+			
+			if (typeTrajet == "TrajetSimple"){
+				
+				if (numLigne ==1){
+					if ((motsIndiv.at(0) == Dep || Dep == "0") && (motsIndiv.at(1) == Arr || Arr == "0")){
+						ajoutTrajetSimple = true;
+					}
+				}
+				else if (numLigne ==2 && ajoutTrajetSimple == true)
+				{
+					Ajouter(new TrajetSimple(motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str()));
+				}
+			}
+			
+			else if (typeTrajet == "TrajetCompose")
+			{
+				if (numLigne ==1){
+					if ((motsIndiv.at(0) == Dep || Dep == "0") && (motsIndiv.at(1) == Arr || Arr == "0")){
+						ajoutTrajetCompose = true;
+					}
+				}
+				if (ajoutTrajetCompose)
+				{
+					if (numLigne == 2)
+					{
+						t1 = new TrajetSimple(motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str());;
+					}
+					else if (numLigne ==3)
+					{
+						t2 = new TrajetSimple(motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str());
+						tc = new TrajetCompose(*t1,*t2,2);
+					}
+					else if (numLigne > 3 && lect != "@")
+					{
+						TrajetSimple t3 (motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str());
+						tc->Ajouter(t3);
+					}
+					if (lect == "@"){
+						Ajouter(tc);
+					}
+				}
+			}
+
+    		if (lect == "@")
+    		{
+				if (typeTrajet == "TrajetCompose" && ajoutTrajetCompose ==true){
+					delete t1;
+					delete t2;
+				}
+    			numLigne=0;
+				ajoutTrajetSimple = false;
+				ajoutTrajetCompose = false;
+    		}
+    		else
+    		{
+    			numLigne++;
+    		}
+    	}
+    }
+	fic.close();
+}
+
 //-------------------------------------------- Constructeurs - destructeur
 Catalogue::Catalogue ( const Catalogue & unCatalogue )
 // Algorithme : RAS

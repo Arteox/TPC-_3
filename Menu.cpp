@@ -153,8 +153,8 @@ int main(){
 					cout << "Sélectionnez un critère de sélection de chargement : " << endl;
 					cout << "1 : aucun critère " << endl;
 					cout << "2 : par type de trajet " << endl;
-					cout << "3: par ville de départ et/ou d'arrivée" << endl;
-					cout << "4: par intervalle de trajets" << endl;
+					cout << "3 : par ville de départ et/ou d'arrivée" << endl;
+					cout << "4 : par intervalle de trajets" << endl;
 					int choix_Selec;
 					cin >> choix_Selec;
 					
@@ -169,6 +169,25 @@ int main(){
 							cin >>typeTrajet;
 							C.ChargerParType(typeTrajet, fichier_choisi);
 							break;
+						}
+						case 3:
+						{
+							cout << "Veuillez saisir le nom de la ville de départ ou 0 si le lieu de départ vous importe peu." <<endl;
+							string Dep;
+							cin >> Dep;
+							
+							cout <<"Veuillez saisir le nom de la ville d'arrivée ou 0 si le lieu d'arrivée vous importe peu." <<endl;
+							string Arr;
+							cin >> Arr;
+							
+							if (Arr == "0" && Dep =="0")
+							{
+								C.Charger(fichier_choisi);
+							}
+							else
+							{
+								C.ChargerParVille(fichier_choisi, Dep, Arr);
+							}
 						}
 					}
 				}

@@ -71,6 +71,8 @@ public:
     void Charger(int numFichier);
 	
 	void ChargerParType(int typeSelecTrajet, int numFichier);
+	
+	void ChargerParVille(int numFichier, string Dep, string Arr);
 
 
 //-------------------------------------------- Constructeurs - destructeur
