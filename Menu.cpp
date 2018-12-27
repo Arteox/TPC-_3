@@ -160,15 +160,14 @@ int main(){
 					
 					switch(choix_Selec){
 						case 1:
-							cout << "avant de charger" << endl;
 							C.Charger(fichier_choisi);
-							cout << "charger fini" <<endl;
 							break;
 						case 2:
 						{
 							cout << "Tapez 1 pour charger que des trajets simples ou 2 pour que des trajets composés" << endl;
 							int typeTrajet;
 							cin >>typeTrajet;
+							C.ChargerParType(typeTrajet, fichier_choisi);
 							break;
 						}
 					}
@@ -190,9 +189,9 @@ int main(){
 	}
     delete [] TS;
 
-	/*for (int i =0; i<MAX_LENGTH;i++){
-		delete TC[i];
-	}*/
+	for (int i =0; i<MAX_LENGTH;i++){
+		//delete TC[i];
+	}
 	delete [] TC;
 
 	delete [] villeA;

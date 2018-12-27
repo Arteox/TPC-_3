@@ -70,7 +70,7 @@ public:
 
     void Charger(int numFichier);
 	
-	//void ChargerParType(int typeSelecTrajet, int numFichier);
+	void ChargerParType(int typeSelecTrajet, int numFichier);
 
 
 //-------------------------------------------- Constructeurs - destructeur
