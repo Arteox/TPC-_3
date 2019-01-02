@@ -111,6 +111,14 @@ void TrajetCompose::Sauvegarder(ofstream& f){
     for (int j =0; j<rempli; j++){
         f << list[j]->GetDepart() <<" " <<list[j]->GetArrivee() << " " << list[j]->GetTransport() << endl;
     }
+    f << '@' <<endl;
+}
+
+void TrajetCompose::SauvegardeType(ofstream& f, int typeTrajet){
+	if (typeTrajet ==2)
+	{
+		this->Sauvegarder(f);
+	}
 }
 
 //------------------------------------------------- Surcharge d'opérateurs

@@ -59,6 +59,8 @@ public:
 
     virtual void Sauvegarder(ofstream& f);
 
+    virtual void SauvegardeType(ofstream& f, int typeTrajet);
+
 //------------------------------------------------- Surcharge d'opérateurs
     Trajet & operator = ( const Trajet & unTrajet );
     // Mode d'emploi :

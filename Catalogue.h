@@ -70,6 +70,8 @@ public:
 
 	void SauvegarderParVille(int numFichier, string Dep, string Arr);
 
+    void SauvegarderParType(int numFichier, int typeSelecTrajet);
+
     void Charger(int numFichier);
 	
 	void ChargerParType(int typeSelecTrajet, int numFichier);

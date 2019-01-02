@@ -52,7 +52,11 @@ const char* Trajet::GetTransport() const
 {
 return "no";
 }
-void Trajet::Sauvegarder(std::ofstream& f){
+void Trajet::Sauvegarder(ofstream& f){
+
+}
+
+void Trajet::SauvegardeType(ofstream& f, int typeTrajet){
 
 }
 

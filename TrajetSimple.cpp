@@ -62,6 +62,14 @@ void TrajetSimple::Sauvegarder(ofstream& f)
     f << "TrajetSimple" <<endl;
     f << Depart << " " << Arrivee << endl;
     f << Depart << " " << Arrivee << " " << Transport <<endl;
+    f << '@' <<endl;
+}
+
+void TrajetSimple::SauvegardeType(ofstream& f, int typeTrajet){
+    if (typeTrajet ==1)
+    {
+        this->Sauvegarder(f);
+    }
 }
 
 //------------------------------------------------- Surcharge d'opérateurs

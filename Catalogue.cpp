@@ -125,7 +125,6 @@ void Catalogue::Sauvegarde(int numFichier)
     {
         for (int i =0; i<nb_trajets;i++){
             collection[i]->Sauvegarder(fic);
-            fic<<'@';
             fic<<endl;
         }
     }
@@ -151,13 +150,33 @@ void Catalogue::SauvegarderParVille(int numFichier, string Dep, string Arr)
 			if ((collection[i]->GetDepart() == Dep || Dep == "0") && (collection[i]->GetArrivee() == Arr || Arr == "0"))
 			{
 				collection[i]->Sauvegarder(fic);
-				fic << '@';
-				fic << endl;
 			}
 		}
 	}
 	fic.close();
 
+	//on sauvegarde dans un fichier le nb de fichier de sauvegarde
+	fic.open("sauvegarde/nb_sauv");
+	if (fic)
+	{
+		fic << numFichier;
+	}
+	fic.close();
+}
+
+void Catalogue::SauvegarderParType(int numFichier, int typeSelecTrajet)
+{
+    ofstream fic;
+    string s = "sauvegarde/sauv" + to_string(numFichier);
+    fic.open(s);
+    if (fic)
+    {
+        for (int i =0; i<nb_trajets;i++){
+            collection[i]->SauvegardeType(fic, typeSelecTrajet);
+        }
+    }
+    fic.close();
+	
 	//on sauvegarde dans un fichier le nb de fichier de sauvegarde
 	fic.open("sauvegarde/nb_sauv");
 	if (fic)

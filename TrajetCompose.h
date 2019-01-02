@@ -78,6 +78,8 @@ public:
 
   void Sauvegarder(ofstream& f);
   
+  void SauvegardeType(ofstream& f, int typeTrajet);
+  
 //------------------------------------------------- Surcharge d'opérateurs
     TrajetCompose & operator = ( const TrajetCompose & unTrajetCompose );
     // Mode d'emploi : RAS

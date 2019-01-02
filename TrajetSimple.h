@@ -61,6 +61,8 @@ public:
 
   void Sauvegarder(ofstream& f);
 
+  void SauvegardeType(ofstream& f, int typeTrajet);
+
 //------------------------------------------------- Surcharge d'opérateurs
     TrajetSimple & operator = ( const TrajetSimple & unTrajetSimple );
     // Mode d'emploi :

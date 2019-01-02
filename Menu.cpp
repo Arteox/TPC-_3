@@ -145,7 +145,7 @@ int main(){
 						string t = "sauvegarde/sauv" + to_string(nb_sauv);
 						fic.open(t);
 						if (fic) {
-							if (typeTrajet_s == 1) {
+							/*if (typeTrajet_s == 1) {
 								for (int i = 0; i < indexSimple; i++)
 									TS[indexSimple]->Sauvegarder(fic);
 							}
@@ -153,13 +153,16 @@ int main(){
 							if (typeTrajet_s == 2) {
 								for (int i = 0; i < indexComp; i++)
 									TC[indexComp]->Sauvegarder(fic);
-							}
+							}*/
+
+							C.SauvegarderParType(nb_sauv, typeTrajet_s);
 						}
 						fic.close();
 						break;
 					}
 
 					case 3:
+					{
 						cout << "Veuillez saisir le nom de la ville de départ ou 0 si le lieu de départ vous importe peu." << endl;
 						string Dep;
 						cin >> Dep;
@@ -169,9 +172,15 @@ int main(){
 						cin >> Arr;
 
 						if (Arr == "0" && Dep == "0")
+						{
 							C.Sauvegarde(nb_sauv);
+						}
 						else
+						{
 							C.SauvegarderParVille(nb_sauv, Dep, Arr);
+						}
+						break;
+					}
 				}
                 nb_sauv++;
                 break;
