@@ -116,11 +116,6 @@ void Catalogue::Recherche(const char * depart, const char * arrivee)
 	}
 }
 
-/*int Catalogue::GetNbTraj()
-{
-    return nb_trajets;
-}*/
-
 void Catalogue::Sauvegarde(int numFichier)
 {
     ofstream fic;
@@ -131,11 +126,38 @@ void Catalogue::Sauvegarde(int numFichier)
         for (int i =0; i<nb_trajets;i++){
             collection[i]->Sauvegarder(fic);
             fic<<'@';
-            fic <<endl;
+            fic<<endl;
         }
     }
     fic.close();
 	
+	//on sauvegarde dans un fichier le nb de fichier de sauvegarde
+	fic.open("sauvegarde/nb_sauv");
+	if (fic)
+	{
+		fic << numFichier;
+	}
+	fic.close();
+}
+
+void Catalogue::SauvegarderParVille(int numFichier, string Dep, string Arr)
+{
+	ofstream fic;
+	string s = "sauvegarde/sauv" + to_string(numFichier);
+	fic.open(s);
+	if (fic)
+	{
+		for (int i = 0; i < nb_trajets; i++) {
+			if ((collection[i]->GetDepart() == Dep || Dep == "0") && (collection[i]->GetArrivee() == Arr || Arr == "0"))
+			{
+				collection[i]->Sauvegarder(fic);
+				fic << '@';
+				fic << endl;
+			}
+		}
+	}
+	fic.close();
+
 	//on sauvegarde dans un fichier le nb de fichier de sauvegarde
 	fic.open("sauvegarde/nb_sauv");
 	if (fic)
