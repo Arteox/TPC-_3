@@ -68,7 +68,7 @@ public:
 
     void Sauvegarde(int numFichier);
 
-	void SauvegarderParVille(int numFichier, string Dep, string Arr)
+	void SauvegarderParVille(int numFichier, string Dep, string Arr);
 
     void Charger(int numFichier);
 	

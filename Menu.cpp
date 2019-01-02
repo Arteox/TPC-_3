@@ -18,7 +18,7 @@ int main(){
 	char* villeB=new char[MAX_LENGTH];
 	char* transport=new char[MAX_LENGTH];
 	Catalogue C;
-	int nb_sauv =1;
+    int nb_sauv =1;
 	
 	
 	//Stocke tous les trajets simples ajoutés avec un index
@@ -40,9 +40,9 @@ int main(){
 		cout<<"Tapez 2 pour ajouter un trajet compose"<<endl;
 		cout<<"Tapez 3 pour faire une recherche"<<endl;
 		cout<<"Tapez 4 pour afficher le catalogue"<<endl;
-		cout<<"Tapez 5 pour sauvegarder le catalogue actuel"<<endl;
-		cout<<"Tapez 6 pour charger un catalogue depuis un fichier"<<endl;
-		cout<<"Tapez 7 pour quitter le catalogue"<<endl;
+        cout<<"Tapez 5 pour sauvegarder le catalogue actuel"<<endl;
+        cout<<"Tapez 6 pour charger un catalogue depuis un fichier"<<endl;
+        cout<<"Tapez 7 pour quitter le catalogue"<<endl;
 
 
 		cin>>choix;
@@ -142,24 +142,24 @@ int main(){
 						cin >> typeTrajet_s;
 						
 						ofstream fic;
-						string s = "sauvegarde/sauv" + to_string(nb_sauv);
-						fic.open(s);
-						if (fic){
-							if (typeTrajet_s == 1){
-								for (int i = 0; i < indexSimple; i++){
+						string t = "sauvegarde/sauv" + to_string(nb_sauv);
+						fic.open(t);
+						if (fic) {
+							if (typeTrajet_s == 1) {
+								for (int i = 0; i < indexSimple; i++)
 									TS[indexSimple]->Sauvegarder(fic);
-								}
 							}
 
 							if (typeTrajet_s == 2) {
-								for (int i = 0; i < indexComp; i++) {
+								for (int i = 0; i < indexComp; i++)
 									TC[indexComp]->Sauvegarder(fic);
-								}
+							}
 						}
+						fic.close();
 						break;
 					}
+
 					case 3:
-					{
 						cout << "Veuillez saisir le nom de la ville de départ ou 0 si le lieu de départ vous importe peu." << endl;
 						string Dep;
 						cin >> Dep;
@@ -169,19 +169,9 @@ int main(){
 						cin >> Arr;
 
 						if (Arr == "0" && Dep == "0")
-						{
 							C.Sauvegarde(nb_sauv);
-						}
 						else
-						{
 							C.SauvegarderParVille(nb_sauv, Dep, Arr);
-						}
-					}
-					case 4:
-					{
-
-					}
-
 				}
                 nb_sauv++;
                 break;
