@@ -192,6 +192,7 @@ TrajetCompose::~TrajetCompose ( )
 #endif
 
 	for (int i =0; i<rempli;i++){
+		list[i]->Afficher();
 		delete list[i];
 	}
     delete [] list;
