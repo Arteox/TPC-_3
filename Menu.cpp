@@ -65,6 +65,7 @@ int main(){
 				C.Ajouter(S1);
 				/*C.Ajouter(TS[indexSimple]);
 				indexSimple++;*/
+				//delete S1;
 				break;
 			}
 				
@@ -111,6 +112,8 @@ int main(){
 					cout << endl;
 				}
 				C.Ajouter(CC);
+				delete S1;
+				delete S2;
 				indexComp++;
 				break;
 			}
