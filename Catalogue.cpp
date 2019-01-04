@@ -185,6 +185,29 @@ void Catalogue::SauvegarderParType(int numFichier, int typeSelecTrajet)
 	fic.close();
 }
 
+void Catalogue::SauvegarderParIntervalle(int numFichier, int n, int m)
+{
+	ofstream fic;
+    string s = "sauvegarde/sauv" + to_string(numFichier);
+    fic.open(s);
+    if (fic)
+    {
+        for (int i =0; i<nb_trajets;i++){
+			if (i+1 >=n && i+1 <=m){
+				collection[i]->Sauvegarder(fic);
+			}
+        }
+    }
+    fic.close();
+	
+	//on sauvegarde dans un fichier le nb de fichier de sauvegarde
+	fic.open("sauvegarde/nb_sauv");
+	if (fic)
+	{
+		fic << numFichier;
+	}
+	fic.close();
+}
 void Catalogue::Charger(int numFichier)
 {
     ifstream fic;

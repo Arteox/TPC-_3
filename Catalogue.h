@@ -71,12 +71,15 @@ public:
 	void SauvegarderParVille(int numFichier, string Dep, string Arr);
 
     void SauvegarderParType(int numFichier, int typeSelecTrajet);
+	
+	void SauvegarderParIntervalle(int numFichier, int n, int m);
 
     void Charger(int numFichier);
 	
 	void ChargerParType(int typeSelecTrajet, int numFichier);
 	
 	void ChargerParVille(int numFichier, string Dep, string Arr);
+	
 	void ChargerParIntervalle(int numFichier, int n, int m);
 
 
