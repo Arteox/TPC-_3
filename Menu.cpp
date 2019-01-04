@@ -20,22 +20,12 @@ int main(){
 	Catalogue C;
     int nb_sauv =1;
 	
-	
-	//Stocke tous les trajets simples ajoutés avec un index
-	//TrajetSimple** TS=new TrajetSimple*[MAX_LENGTH];
-	int indexSimple=0;
-	
-	//stocke tous les trajets composés ajoutés avec un index
-	//TrajetCompose** TC=new TrajetCompose*[MAX_LENGTH];		
-	int indexComp=0;
-	
 	//variable pour quitter ou rester dans le menu
 	bool arret=false; 
 	
 	TrajetSimple* S1;
 	TrajetSimple* S2;
 	TrajetCompose* CC;
-	//essayer de remplacer tous les TS et TC 
 
 	while(!arret){
 		
@@ -60,12 +50,8 @@ int main(){
 				cout<<"Veuillez renseigner la ville de depart, la ville d'arrivee et le moyen de transport"<<endl;
 
 				cin>>villeA>>villeB>>transport;
-				//TS[indexSimple]=new TrajetSimple(villeA,villeB,transport);
 				S1 = new TrajetSimple(villeA, villeB, transport);
 				C.Ajouter(S1);
-				/*C.Ajouter(TS[indexSimple]);
-				indexSimple++;*/
-				//delete S1;
 				break;
 			}
 				
@@ -101,20 +87,16 @@ int main(){
 						S1=new TrajetSimple(villeA,villeB,transport);
 					}
 					if(i==1){
-						//TC[indexComp]=new TrajetCompose(*TS[indexSimple-1],*TS[indexSimple],nbElements);
 						S2 = new TrajetSimple(villeA, villeB, transport);
 						CC = new TrajetCompose(*S1, *S2, nbElements);
 					}else if(i>1){
-						//TC[indexComp]->Ajouter(*TS[indexSimple]);
 						CC->Ajouter(*S1);
 					}
-					//indexSimple++;
 					cout << endl;
 				}
 				C.Ajouter(CC);
 				delete S1;
 				delete S2;
-				indexComp++;
 				break;
 			}
 				
