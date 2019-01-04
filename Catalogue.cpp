@@ -125,7 +125,6 @@ void Catalogue::Sauvegarde(int numFichier)
     {
         for (int i =0; i<nb_trajets;i++){
             collection[i]->Sauvegarder(fic);
-            fic<<endl;
         }
     }
     fic.close();
@@ -188,7 +187,6 @@ void Catalogue::SauvegarderParType(int numFichier, int typeSelecTrajet)
 
 void Catalogue::Charger(int numFichier)
 {
-	//cout << "debut charger" <<endl;
     ifstream fic;
     string s = "sauvegarde/sauv" + to_string(numFichier);
     string lect;
@@ -200,13 +198,11 @@ void Catalogue::Charger(int numFichier)
 	TrajetSimple* t2;
 	TrajetCompose* tc;
 	
-	//cout << "debut lecture fichier" <<endl;
     fic.open(s);
     if (fic)
     {
     	for (lect; getline(fic, lect); )
     	{
-			//cout << numLigne << endl;
     		if (numLigne ==0)
     		{
     			typeTrajet= lect;
@@ -241,12 +237,10 @@ void Catalogue::Charger(int numFichier)
 
     		if (lect == "@")
     		{
-				//cout << "avant delete de t1 et t2" <<endl;
 				if (typeTrajet == "TrajetCompose"){
 					delete t1;
 					delete t2;
 				}
-				//cout << "après delete de t1 et t2" <<endl;
     			numLigne=0;
     		}
     		else
@@ -256,7 +250,6 @@ void Catalogue::Charger(int numFichier)
     	}
     }
 	fic.close();
-	//cout << "fin charger" <<endl;
 }
 
 void Catalogue::ChargerParType(int typeSelecTrajet, int numFichier)
@@ -312,13 +305,10 @@ void Catalogue::ChargerParType(int typeSelecTrajet, int numFichier)
 
     		if (lect == "@")
     		{
-				//cout << "avant if delete" <<endl;
 				if (typeTrajet == "TrajetCompose" && typeSelecTrajet==2){
-					//cout << "dans le if delete" << endl;
 					delete t1;
 					delete t2;
 				}
-				//cout << "apres if delete" << endl;
     			numLigne=0;
     		}
     		else
@@ -408,6 +398,78 @@ void Catalogue::ChargerParVille(int numFichier, string Dep, string Arr)
     			numLigne=0;
 				ajoutTrajetSimple = false;
 				ajoutTrajetCompose = false;
+    		}
+    		else
+    		{
+    			numLigne++;
+    		}
+    	}
+    }
+	fic.close();
+}
+
+void Catalogue::ChargerParIntervalle(int numFichier, int n, int m){
+	ifstream fic;
+    string s = "sauvegarde/sauv" + to_string(numFichier);
+    string lect;
+    string typeTrajet;
+    int numLigne =0;
+	int compteurTrajet =1;
+	
+	//nécessaire pour le constructeur du trajet compose
+	TrajetSimple* t1;
+	TrajetSimple* t2;
+	TrajetCompose* tc;
+	
+    fic.open(s);
+    if (fic)
+    {
+    	for (lect; getline(fic, lect); )
+    	{
+    		if (numLigne ==0)
+    		{
+    			typeTrajet= lect;
+    		}
+			istringstream iss(lect);
+    		vector <string> motsIndiv {istream_iterator<string>{iss}, istream_iterator<string>{}};
+			
+			if (compteurTrajet >=n && compteurTrajet <=m){
+				
+				if (typeTrajet == "TrajetSimple" && numLigne ==2)
+				{
+					Ajouter(new TrajetSimple(motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str()));
+				}
+				
+				else if (typeTrajet == "TrajetCompose")
+				{
+					if (numLigne == 2)
+					{
+						t1 = new TrajetSimple(motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str());;
+					}
+					else if (numLigne ==3)
+					{
+						t2 = new TrajetSimple(motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str());
+						tc = new TrajetCompose(*t1,*t2,2);
+					}
+					else if (numLigne > 3 && lect != "@")
+					{
+						TrajetSimple t3 (motsIndiv.at(0).c_str(),motsIndiv.at(1).c_str(),motsIndiv.at(2).c_str());
+						tc->Ajouter(t3);
+					}
+					if (lect == "@"){
+						Ajouter(tc);
+					}
+				}
+			}
+
+    		if (lect == "@")
+    		{
+				if (typeTrajet == "TrajetCompose" && compteurTrajet >=n && compteurTrajet <=m){
+					delete t1;
+					delete t2;
+				}
+    			numLigne=0;
+				compteurTrajet++;
     		}
     		else
     		{

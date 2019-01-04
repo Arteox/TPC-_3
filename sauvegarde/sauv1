@@ -2,3 +2,29 @@ TrajetSimple
 a z
 a z e
 @
+TrajetCompose
+z f
+z s q
+s f q
+@
+TrajetSimple
+z e
+z e f
+@
+TrajetSimple
+f ds
+f ds s
+@
+TrajetCompose
+h f
+h t f
+t f s
+@
+TrajetSimple
+a d
+a d x
+@
+TrajetSimple
+j t
+j t f
+@

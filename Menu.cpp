@@ -207,7 +207,7 @@ int main(){
 					cout << "1 : aucun critère " << endl;
 					cout << "2 : par type de trajet " << endl;
 					cout << "3 : par ville de départ et/ou d'arrivée" << endl;
-					cout << "4 : par intervalle de trajets" << endl;
+					cout << "4 : par intervalle de trajets, du n-ième trajet au m-ième trajet" << endl;
 					int choix_Selec;
 					cin >> choix_Selec;
 					
@@ -242,6 +242,26 @@ int main(){
 								C.ChargerParVille(fichier_choisi, Dep, Arr);
 							}
 						}
+						
+						case 4:
+						{
+							int n;
+							int m;
+							bool rempliCorrect = false;
+							while (!rempliCorrect){
+								cout << "Veuillez saisir la valeur de n." <<endl;
+								cin >> n;
+								cout << "Veuillez saisir la valeur de m."<<endl;
+								cin >> m;
+								if (m-n+1 < 1){
+									cout << "Erreur : il faut que m-n+1>=1" <<endl;
+								}
+								else {
+									rempliCorrect = true;
+								}
+							}
+							C.ChargerParIntervalle(fichier_choisi, n, m);
+						}
 					}
 				}
 				break;
@@ -255,19 +275,8 @@ int main(){
 		endl(cout);
 	}
 
-	//on libère toute la mémoire allouée
-	for (int i =0; i<MAX_LENGTH;i++){
-		//delete TS[i];
-	}
-    //delete [] TS;
+	//on libère toute la mémoire allouée qui a été copiée en profondeur
 
-	for (int i =0; i<MAX_LENGTH;i++){
-		//delete TC[i];
-	}
-	//delete [] TC;
-	//delete S1;
-	//delete S2;
-	//delete CC;
 	delete [] villeA;
 	delete [] villeB;
 	delete [] transport;
