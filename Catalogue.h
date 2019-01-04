@@ -99,8 +99,6 @@ public:
     // Contrat :
     // aucun
 
-
-    //friend class Menu;
 //------------------------------------------------------------------ PRIVE
 
 protected:

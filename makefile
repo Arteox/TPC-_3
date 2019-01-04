@@ -21,7 +21,7 @@ Catalogue.o: Catalogue.cpp Catalogue.h
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --max-stackframe=10485760 ./$@
 
 %.o: %.cpp 
-	g++ -ansi -pedantic -Wall -std=c++11 -c $< -o $@ 
+	g++ -ansi -DMAP -pedantic -Wall -std=c++11 -c $< -o $@ 
 
 clean : 
 	rm -rf Test.ex Menu.ex *.o core

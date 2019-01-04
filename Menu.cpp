@@ -20,18 +20,12 @@ int main(){
 	Catalogue C;
     int nb_sauv =1;
 	
-	
-	//Stocke tous les trajets simples ajoutés avec un index
-	TrajetSimple** TS=new TrajetSimple*[MAX_LENGTH];
-	int indexSimple=0;
-	
-	//stocke tous les trajets composés ajoutés avec un index
-	TrajetCompose** TC=new TrajetCompose*[MAX_LENGTH];		
-	int indexComp=0;
-	
 	//variable pour quitter ou rester dans le menu
 	bool arret=false; 
-
+	
+	TrajetSimple* S1;
+	TrajetSimple* S2;
+	TrajetCompose* CC;
 
 	while(!arret){
 		
@@ -50,18 +44,20 @@ int main(){
 		switch(choix){
 			//Ajout d'un trajet simple
 			case 1: 
+			{
 				
 				cout<<"Vous avez choisi l'ajout de trajet simple"<<endl;
 				cout<<"Veuillez renseigner la ville de depart, la ville d'arrivee et le moyen de transport"<<endl;
 
 				cin>>villeA>>villeB>>transport;
-				TS[indexSimple]=new TrajetSimple(villeA,villeB,transport);
-				C.Ajouter(TS[indexSimple]);			
-				indexSimple++;
+				S1 = new TrajetSimple(villeA, villeB, transport);
+				C.Ajouter(S1);
 				break;
+			}
 				
 			//Ajout d'un trajet composé
 			case 2:
+			{
 				
 				cout<<"Vous avez choisi l'ajout de trajet compose"<<endl;
 
@@ -77,28 +73,32 @@ int main(){
 					while (ErrRemplissage){
 						cout<<"Veuillez renseigner la ville de depart, la ville d'arrivee et le moyen de transport du "<<i+1<<"e trajet"<<endl;
 						cin>>villeA>>villeB>>transport;
-						if (i==0 || !strcmp(villeA,TS[indexSimple-1]->GetArrivee())){
+						if (i==0 || !strcmp(villeA,S1->GetArrivee())){
 							ErrRemplissage=false;
 						}
 						else {
 							cout << "Il faut que la ville de départ corresponde à la ville d'arrivée du sous-trajet précédent. Veuillez à nouveau ressaisir un trajet valide."<<endl;
 							endl(cout);
-							cout <<"La ville d'arrivée du sous-trajet précédent est : " <<TS[indexSimple-1]->GetArrivee() <<endl;
+							cout <<"La ville d'arrivée du sous-trajet précédent est : " <<S1->GetArrivee() <<endl;
 							endl(cout);
 						}
 					}
-					TS[indexSimple]=new TrajetSimple(villeA,villeB,transport);
-					if(i==1){
-						TC[indexComp]=new TrajetCompose(*TS[indexSimple-1],*TS[indexSimple],nbElements);
-					}else if(i>1){
-						TC[indexComp]->Ajouter(*TS[indexSimple]);
+					if (i !=1){
+						S1=new TrajetSimple(villeA,villeB,transport);
 					}
-					indexSimple++;
+					if(i==1){
+						S2 = new TrajetSimple(villeA, villeB, transport);
+						CC = new TrajetCompose(*S1, *S2, nbElements);
+					}else if(i>1){
+						CC->Ajouter(*S1);
+					}
 					cout << endl;
 				}
-				C.Ajouter(TC[indexComp]);
-				indexComp++;
+				C.Ajouter(CC);
+				delete S1;
+				delete S2;
 				break;
+			}
 				
 			//recherche d'un trajet
 			case 3:
@@ -118,6 +118,7 @@ int main(){
 
 			//sauvegarde du catalogue
             case 5:
+			{
                 cout << "Vous avez choisi la sauvegarde du catalogue actuel"<<endl;
 				cout << "Sélectionnez un critère de sélection de la sauvegarde : " << endl;
 				cout << "1 : aucun critère " << endl;
@@ -145,16 +146,6 @@ int main(){
 						string t = "sauvegarde/sauv" + to_string(nb_sauv);
 						fic.open(t);
 						if (fic) {
-							/*if (typeTrajet_s == 1) {
-								for (int i = 0; i < indexSimple; i++)
-									TS[indexSimple]->Sauvegarder(fic);
-							}
-
-							if (typeTrajet_s == 2) {
-								for (int i = 0; i < indexComp; i++)
-									TC[indexComp]->Sauvegarder(fic);
-							}*/
-
 							C.SauvegarderParType(nb_sauv, typeTrajet_s);
 						}
 						fic.close();
@@ -184,7 +175,8 @@ int main(){
 				}
                 nb_sauv++;
                 break;
-
+			}
+			
 			//chargement d'un catalogue
             case 6:
 			{
@@ -265,15 +257,17 @@ int main(){
 
 	//on libère toute la mémoire allouée
 	for (int i =0; i<MAX_LENGTH;i++){
-		delete TS[i];
+		//delete TS[i];
 	}
-    delete [] TS;
+    //delete [] TS;
 
 	for (int i =0; i<MAX_LENGTH;i++){
 		//delete TC[i];
 	}
-	delete [] TC;
-
+	//delete [] TC;
+	//delete S1;
+	//delete S2;
+	//delete CC;
 	delete [] villeA;
 	delete [] villeB;
 	delete [] transport;
