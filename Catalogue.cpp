@@ -117,6 +117,8 @@ void Catalogue::Recherche(const char * depart, const char * arrivee)
 }
 
 void Catalogue::Sauvegarde(int numFichier)
+// Algorithme :
+// Le dossier sauvegarde est indiqué par son chemin relatif.
 {
     ofstream fic;
     string s = "sauvegarde/sauv" + to_string(numFichier);
@@ -129,7 +131,6 @@ void Catalogue::Sauvegarde(int numFichier)
     }
     fic.close();
 	
-	//on sauvegarde dans un fichier le nb de fichier de sauvegarde
 	fic.open("sauvegarde/nb_sauv");
 	if (fic)
 	{
@@ -139,6 +140,7 @@ void Catalogue::Sauvegarde(int numFichier)
 }
 
 void Catalogue::SauvegarderParVille(int numFichier, string Dep, string Arr)
+// Algorithme : RAS
 {
 	ofstream fic;
 	string s = "sauvegarde/sauv" + to_string(numFichier);
@@ -164,6 +166,7 @@ void Catalogue::SauvegarderParVille(int numFichier, string Dep, string Arr)
 }
 
 void Catalogue::SauvegarderParType(int numFichier, int typeSelecTrajet)
+// Algorithme : RAS
 {
     ofstream fic;
     string s = "sauvegarde/sauv" + to_string(numFichier);
@@ -186,6 +189,7 @@ void Catalogue::SauvegarderParType(int numFichier, int typeSelecTrajet)
 }
 
 void Catalogue::SauvegarderParIntervalle(int numFichier, int n, int m)
+// Algorithme : RAS
 {
 	ofstream fic;
     string s = "sauvegarde/sauv" + to_string(numFichier);
@@ -209,6 +213,12 @@ void Catalogue::SauvegarderParIntervalle(int numFichier, int n, int m)
 	fic.close();
 }
 void Catalogue::Charger(int numFichier)
+// Algorithme : 
+// Connaissant le format du fichier, on récupère les informations ligne par ligne
+// @ indique la fin de la lecture des informations d'un trajet
+// Il y a deux pointeurs de trajets simples qui sont nécessaires pour appeler le constructeur de la classe TrajetCompose
+// On ne fait que des copies en surface pour les trajets, à part lorsqu'on appelle le constructeur de la classe TrajetCompose
+
 {
     ifstream fic;
     string s = "sauvegarde/sauv" + to_string(numFichier);
@@ -216,7 +226,6 @@ void Catalogue::Charger(int numFichier)
     string typeTrajet;
     int numLigne =0;
 	
-	//nécessaire pour le constructeur du trajet compose
 	TrajetSimple* t1;
 	TrajetSimple* t2;
 	TrajetCompose* tc;
@@ -276,6 +285,7 @@ void Catalogue::Charger(int numFichier)
 }
 
 void Catalogue::ChargerParType(int typeSelecTrajet, int numFichier)
+// Algorithme : RAS
 {
 	ifstream fic;
     string s = "sauvegarde/sauv" + to_string(numFichier);
@@ -283,7 +293,6 @@ void Catalogue::ChargerParType(int typeSelecTrajet, int numFichier)
     string typeTrajet;
     int numLigne =0;
 	
-	//nécessaire pour le constructeur du trajet compose
 	TrajetSimple* t1;
 	TrajetSimple* t2;
 	TrajetCompose* tc;
@@ -344,6 +353,7 @@ void Catalogue::ChargerParType(int typeSelecTrajet, int numFichier)
 }
 
 void Catalogue::ChargerParVille(int numFichier, string Dep, string Arr)
+// Algorithme : RAS
 {
     ifstream fic;
     string s = "sauvegarde/sauv" + to_string(numFichier);
@@ -431,7 +441,9 @@ void Catalogue::ChargerParVille(int numFichier, string Dep, string Arr)
 	fic.close();
 }
 
-void Catalogue::ChargerParIntervalle(int numFichier, int n, int m){
+void Catalogue::ChargerParIntervalle(int numFichier, int n, int m)
+// Algorithme : RAS
+{
 	ifstream fic;
     string s = "sauvegarde/sauv" + to_string(numFichier);
     string lect;
@@ -439,7 +451,6 @@ void Catalogue::ChargerParIntervalle(int numFichier, int n, int m){
     int numLigne =0;
 	int compteurTrajet =1;
 	
-	//nécessaire pour le constructeur du trajet compose
 	TrajetSimple* t1;
 	TrajetSimple* t2;
 	TrajetCompose* tc;

@@ -1,13 +1,4 @@
 TrajetSimple
-z e
-z e f
-@
-TrajetSimple
-f ds
-f ds s
-@
-TrajetCompose
-h f
-h t f
-t f s
+a ze
+a ze z
 @

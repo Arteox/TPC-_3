@@ -76,9 +76,25 @@ public:
     // Contrat :
     // aucun
 
-  void Sauvegarder(ofstream& f);
+  void Sauvegarder(ofstream& f) const;
+  // Mode d'emploi :
+  // Sauvegarde les informations caractéristiques du trajet composé.
+  // Format :
+  // TrajetCompose
+  // VilleDépart VilleArrivée
+  // VilleDépart1 VilleArrivée1 MoyenTransport1
+  // VilleDépart2 VilleArrivée2 MoyenTransport2
+  // et ainsi de suite
+  // @
+
+  // Contrat : 
+  // ofstream f est un flux d'entrée ouvert
   
-  void SauvegardeType(ofstream& f, int typeTrajet);
+  void SauvegardeType(ofstream& f, int typeTrajet) const;
+	// Mode d'emploi :
+    // Sauvegarde les informations caractéristiques du trajet composé.
+    // Contrat : 
+    // ofstream f est un flux d'entrée ouvert et uniquement si typeTrajet = 2
   
 //------------------------------------------------- Surcharge d'opérateurs
     TrajetCompose & operator = ( const TrajetCompose & unTrajetCompose );

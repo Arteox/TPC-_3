@@ -57,9 +57,17 @@ public:
     // aucun
 
 
-    virtual void Sauvegarder(ofstream& f);
+    virtual void Sauvegarder(ofstream& f) const =0;
+	// Mode d'emploi :
+    //
+    // Contrat :
+    // aucun
 
-    virtual void SauvegardeType(ofstream& f, int typeTrajet);
+    virtual void SauvegardeType(ofstream& f, int typeTrajet) const =0;
+	// Mode d'emploi : 
+    //
+    // Contrat :
+    // aucun
 
 //------------------------------------------------- Surcharge d'opérateurs
     Trajet & operator = ( const Trajet & unTrajet );

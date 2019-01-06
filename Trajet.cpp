@@ -52,13 +52,6 @@ const char* Trajet::GetTransport() const
 {
 return "no";
 }
-void Trajet::Sauvegarder(ofstream& f){
-
-}
-
-void Trajet::SauvegardeType(ofstream& f, int typeTrajet){
-
-}
 
 //------------------------------------------------- Surcharge d'opérateurs
 Trajet & Trajet::operator = ( const Trajet & unTrajet )

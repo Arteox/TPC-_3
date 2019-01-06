@@ -57,7 +57,9 @@ const char* TrajetSimple::GetTransport() const
 	return Transport;
 }
 
-void TrajetSimple::Sauvegarder(ofstream& f)
+void TrajetSimple::Sauvegarder(ofstream& f) const
+// Algorithme : RAS
+//
 {
     f << "TrajetSimple" <<endl;
     f << Depart << " " << Arrivee << endl;
@@ -65,7 +67,9 @@ void TrajetSimple::Sauvegarder(ofstream& f)
     f << '@' <<endl;
 }
 
-void TrajetSimple::SauvegardeType(ofstream& f, int typeTrajet){
+void TrajetSimple::SauvegardeType(ofstream& f, int typeTrajet) const{
+// Algorithme : RAS
+//
     if (typeTrajet ==1)
     {
         this->Sauvegarder(f);

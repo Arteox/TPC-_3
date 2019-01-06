@@ -63,24 +63,66 @@ public:
 	// Affiche le premier Trajet qui répond aux critères (recherche simple).
     // Contrat :
     // aucun
-    
-    //int GetNbTraj();
 
     void Sauvegarde(int numFichier);
+	// Mode d'emploi :
+    // Sauvegarde le catalogue courant dans le fichier txt dans le dossier sauvegarde/
+	// Le numéro de ce fichier est indiqué en paramètre (sauv1, sauv2, etc)
+    // Contrat :
+    // aucun
 
 	void SauvegarderParVille(int numFichier, string Dep, string Arr);
+	// Mode d'emploi :
+    // Sauvegarde uniquement les trajets du catalogue dont la ville de départ et/ou la ville d'arrivée correspondent
+	// aux paramètres indiqués.
+	// Si Dep = 0 alors on regarde uniquement la ville d'arrivée du trajet.
+	// De même si Arr =0 on regarde uniquement la ville de départ.
+	// Si Dep et Arr valent 0, tous les trajets sont sauvegardés.
+    // Contrat :
+    // aucun
 
     void SauvegarderParType(int numFichier, int typeSelecTrajet);
+	// Mode d'emploi :
+    // Sauvegarde uniquement des trajets simples (typeSelecTrajet =1) ou des trajets composés (typeSelecTrajet = 2)
+    // Contrat :
+    // aucun
 	
 	void SauvegarderParIntervalle(int numFichier, int n, int m);
+	// Mode d'emploi :
+    // Sauvegarde tous les trajets se situant dans l'intervalle [n ,m]
+    // Contrat :
+    // n <= m
 
     void Charger(int numFichier);
+	// Mode d'emploi :
+    // Ajoute au catalogue tous les trajets enregistrés dans le numFichier-ième fichier dans le repertoire sauvegarde/
+    // Contrat :
+    // aucun
 	
 	void ChargerParType(int typeSelecTrajet, int numFichier);
+	// Mode d'emploi :
+    // Même chose que la méthode Charger avec une spécification en plus
+	// Si typeSelecTrajet = 1 on n'ajoute que les trajets simples
+	// et si typeSelecTrajet =2 que les trajets composés.
+    // Contrat :
+    // aucun
 	
 	void ChargerParVille(int numFichier, string Dep, string Arr);
+	// Mode d'emploi :
+    // Ajoute uniquement les trajets au catalogue 
+	// dont la ville de départ et/ou la ville d'arrivée correspondent
+	// aux paramètres indiqués.
+	// Si Dep = 0 alors on regarde uniquement la ville d'arrivée du trajet.
+	// De même si Arr =0 on regarde uniquement la ville de départ.
+	// Si Dep et Arr valent 0, tous les trajets sont ajoutés.
+    // Contrat :
+    // aucun
 	
 	void ChargerParIntervalle(int numFichier, int n, int m);
+	// Mode d'emploi :
+    // Ajoute tous les trajets du fichier indiqué qui sont dans l'intervalle [n, m]
+    // Contrat :
+    // n <=m
 
 
 //-------------------------------------------- Constructeurs - destructeur

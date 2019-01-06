@@ -59,9 +59,22 @@ public:
     // Contrat : 
     // aucun
 
-  void Sauvegarder(ofstream& f);
+  void Sauvegarder(ofstream& f) const;
+	// Mode d'emploi :
+    // Sauvegarde les informations caractéristiques du trajet simple.
+	// Format :
+	// TrajetSimple
+	// VilleDépart VilleArrivée
+	// VilleDépart VilleArrivée MoyenTransport
+	// @
+    // Contrat : 
+    // ofstream f est un flux d'entrée ouvert
 
-  void SauvegardeType(ofstream& f, int typeTrajet);
+  void SauvegardeType(ofstream& f, int typeTrajet) const;
+  // Mode d'emploi :
+  // Sauvegarde les informations caractéristiques du trajet simple.
+  // Contrat : 
+  // ofstream f est un flux d'entrée ouvert et uniquement si typeTrajet = 1
 
 //------------------------------------------------- Surcharge d'opérateurs
     TrajetSimple & operator = ( const TrajetSimple & unTrajetSimple );

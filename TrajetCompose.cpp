@@ -105,7 +105,9 @@ void TrajetCompose::Ajouter(const TrajetSimple &t)
 
 }
 
-void TrajetCompose::Sauvegarder(ofstream& f){
+void TrajetCompose::Sauvegarder(ofstream& f) const{
+// Algorithme : RAS
+//
     f << "TrajetCompose" << endl;
     f << GetDepart() << " " << GetArrivee() << endl;
     for (int j =0; j<rempli; j++){
@@ -114,7 +116,9 @@ void TrajetCompose::Sauvegarder(ofstream& f){
     f << '@' <<endl;
 }
 
-void TrajetCompose::SauvegardeType(ofstream& f, int typeTrajet){
+void TrajetCompose::SauvegardeType(ofstream& f, int typeTrajet) const{
+// Algorithme : RAS
+//
 	if (typeTrajet ==2)
 	{
 		this->Sauvegarder(f);
