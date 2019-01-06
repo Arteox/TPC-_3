@@ -90,7 +90,7 @@ public:
 	
 	void SauvegarderParIntervalle(int numFichier, int n, int m);
 	// Mode d'emploi :
-    // Sauvegarde tous les trajets se situant dans l'intervalle [n ,m]
+    // Sauvegarde tous les trajets se situant dans l'intervalle [n ,m] inclus entre 0 et nb_trajets
     // Contrat :
     // n <= m
 
@@ -121,7 +121,7 @@ public:
 	
 	void ChargerParIntervalle(int numFichier, int n, int m);
 	// Mode d'emploi :
-    // Ajoute tous les trajets du fichier indiqué qui sont dans l'intervalle [n, m]
+    // Ajoute tous les trajets du fichier indiqué qui sont dans l'intervalle [n, m] inclus entre 0 et nb_trajets
     // Contrat :
     // n <=m
 
