@@ -1,3 +1,11 @@
+/*************************************************************************
+                           Menu  -  description
+                             -------------------
+    début                : 24/12/2018
+    copyright            : (C) 2018 par Alexandra LAFAILLE, Louis UNG
+    e-mail               : louis.ung@insa-lyon.fr, alexandra.lafaille@insa-lyon.fr
+*************************************************************************/
+
 #include <iostream>
 #include <cstring>
 #include <fstream>

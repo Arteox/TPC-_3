@@ -1,9 +1,9 @@
 /*************************************************************************
                            Menu  -  description
                              -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-ma ) il               : $EMAIL$
+    début                : 24/12/2018
+    copyright            : (C) 2018 par Alexandra LAFAILLE, Louis UNG
+    e-mail               : louis.ung@insa-lyon.fr, alexandra.lafaille@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface de la classe <Menu> (fichier Menu.h) ----------------

@@ -1,9 +1,9 @@
 /*************************************************************************
                            Catalogue  -  description
                              -------------------
-    début                : 19/11/2018
-    copyright            : (C) 2018 par Corentin LAHAROTTE, Louis UNG, Jan-Markus GELFGREN
-    e-mail               : colapala@gmail.com, ung.louis@hotmail.fr
+    début                : 24/12/2018
+    copyright            : (C) 2018 par Alexandra LAFAILLE, Louis UNG
+    e-mail               : louis.ung@insa-lyon.fr, alexandra.lafaille@insa-lyon.fr
 *************************************************************************/
 
 //---------- Interface de la classe <Catalogue> (fichier Trajet.h) ----------------
@@ -68,6 +68,7 @@ public:
 	// Mode d'emploi :
     // Sauvegarde le catalogue courant dans le fichier txt dans le dossier sauvegarde/
 	// Le numéro de ce fichier est indiqué en paramètre (sauv1, sauv2, etc)
+	// met à jour le numéro du fichier le plus récent dans sauvegarde/nb_sauv
     // Contrat :
     // aucun
 

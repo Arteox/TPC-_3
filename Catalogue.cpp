@@ -1,9 +1,9 @@
 /*************************************************************************
                            Catalogue  -  description
                              -------------------
-    début                : 19/11/2018
-    copyright            : (C) 2018 par Corentin LAHAROTTE, Louis UNG, Jan-Markus GELFGREN
-    e-mail               : colapala@gmail.com, ung.louis@hotmail.fr
+    début                : 24/12/2018
+    copyright            : (C) 2018 par Alexandra LAFAILLE, Louis UNG
+    e-mail               : louis.ung@insa-lyon.fr, alexandra.lafaille@insa-lyon.fr
 *************************************************************************/
 
 //---------- Réalisation de la classe <Catalogue> (fichier Catalogue.cpp) ------------
